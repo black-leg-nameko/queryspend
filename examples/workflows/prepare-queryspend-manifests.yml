@@ -1,0 +1,55 @@
+name: Prepare queryspend manifests
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
+        with:
+          python-version: "3.11"
+      - name: Compile trusted base artifact without cloud credentials
+        run: |
+          ./scripts/ci-compile-dbt
+          cp target/manifest.json "$RUNNER_TEMP/base-manifest.json"
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          clean: true
+      - name: Compile untrusted PR artifact without cloud credentials
+        run: |
+          ./scripts/ci-compile-dbt
+          mkdir -p queryspend-input/base queryspend-input/head
+          cp "$RUNNER_TEMP/base-manifest.json" queryspend-input/base/manifest.json
+          cp target/manifest.json queryspend-input/head/manifest.json
+      - name: Record immutable producer context
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          pathlib.Path("queryspend-input/context.json").write_text(json.dumps({
+              "event": "pull_request",
+              "head_sha": os.environ["HEAD_SHA"],
+              "repository": os.environ["REPOSITORY"],
+              "pull_request": int(os.environ["PR_NUMBER"]),
+          }, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: queryspend-manifests
+          path: queryspend-input
+          if-no-files-found: error
+          retention-days: 1

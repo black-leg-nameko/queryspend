@@ -1,0 +1,85 @@
+name: queryspend cost
+description: Estimate recurring BigQuery cost changes from base/head dbt manifests.
+author: queryspend contributors
+inputs:
+  base_manifest:
+    description: Base branch dbt manifest.json path.
+    required: true
+  head_manifest:
+    description: Pull request head dbt manifest.json path.
+    required: true
+  config:
+    description: queryspend v1 configuration path.
+    required: false
+    default: .queryspend.yml
+  report_path:
+    description: Atomic Cost Change Manifest JSON path.
+    required: false
+    default: queryspend-report.json
+  comment:
+    description: Best-effort same-repository pull request comment.
+    required: false
+    default: "true"
+outputs:
+  decision:
+    description: pass, warn, block, or unknown.
+    value: ${{ steps.evaluate.outputs.decision }}
+  known_monthly_delta_usd:
+    description: Known USD subtotal as a decimal string, or blank.
+    value: ${{ steps.evaluate.outputs.known_monthly_delta_usd }}
+  confidence:
+    description: Aggregate confidence label.
+    value: ${{ steps.evaluate.outputs.confidence }}
+  report_path:
+    description: Cost Change Manifest JSON path.
+    value: ${{ steps.evaluate.outputs.report_path }}
+runs:
+  using: composite
+  steps:
+    - name: Install hash-locked runtime dependencies
+      shell: bash
+      run: >-
+        python -m pip install
+        --disable-pip-version-check
+        --require-hashes
+        --requirement "$GITHUB_ACTION_PATH/requirements-action.txt"
+    - name: Evaluate cost change
+      id: evaluate
+      shell: bash
+      env:
+        PYTHONPATH: ${{ github.action_path }}
+        INPUT_BASE: ${{ inputs.base_manifest }}
+        INPUT_HEAD: ${{ inputs.head_manifest }}
+        INPUT_CONFIG: ${{ inputs.config }}
+        INPUT_REPORT: ${{ inputs.report_path }}
+        INPUT_COMMENT: ${{ inputs.comment }}
+      run: |
+        set -euo pipefail
+        paths=("$INPUT_BASE" "$INPUT_HEAD")
+        config_args=()
+        if [[ -f "$INPUT_CONFIG" ]]; then
+          paths+=("$INPUT_CONFIG")
+          config_args=(--config "$INPUT_CONFIG")
+        fi
+        python -m queryspend.github_action preflight "${paths[@]}" --output "$INPUT_REPORT"
+        set +e
+        python -m queryspend.cli check \
+          --base "$INPUT_BASE" \
+          --head "$INPUT_HEAD" \
+          "${config_args[@]}" \
+          --output "$INPUT_REPORT" \
+          --format terminal \
+          --no-progress
+        evaluation_status=$?
+        set -e
+        if [[ -f "$INPUT_REPORT" ]]; then
+          python -m queryspend.github_action finalize \
+            --report "$INPUT_REPORT" \
+            --comment "$INPUT_COMMENT"
+        fi
+        echo "evaluation_exit_code=$evaluation_status" >> "$GITHUB_OUTPUT"
+    - name: Apply queryspend conclusion
+      shell: bash
+      env:
+        EVALUATION_EXIT_CODE: ${{ steps.evaluate.outputs.evaluation_exit_code }}
+      run: exit "$EVALUATION_EXIT_CODE"

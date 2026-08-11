@@ -1,0 +1,121 @@
+name: queryspend/cost
+
+on:
+  workflow_run:
+    workflows: [Prepare queryspend manifests]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  verify-input:
+    name: Verify untrusted queryspend input
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: queryspend-manifests
+          path: queryspend-input
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+      - name: Verify producer context without credentials
+        env:
+          EXPECTED_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          EXPECTED_REPOSITORY: ${{ github.repository }}
+          EXPECTED_PR: ${{ github.event.workflow_run.pull_requests[0].number }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, sys
+          root = pathlib.Path("queryspend-input")
+          expected_files = {
+              pathlib.Path("context.json"),
+              pathlib.Path("base/manifest.json"),
+              pathlib.Path("head/manifest.json"),
+          }
+          entries = list(root.rglob("*"))
+          if any(path.is_symlink() for path in entries):
+              sys.exit("artifact must not contain symlinks")
+          actual_files = {
+              path.relative_to(root) for path in entries if path.is_file()
+          }
+          if actual_files != expected_files:
+              sys.exit("artifact file set mismatch")
+          for relative in expected_files - {pathlib.Path("context.json")}:
+              manifest = root / relative
+              if manifest.stat().st_size > 100 * 1024 * 1024:
+                  sys.exit("manifest exceeds 100 MiB")
+          path = root / "context.json"
+          if path.stat().st_size > 4096:
+              sys.exit("context exceeds 4 KiB")
+          value = json.loads(path.read_text())
+          expected = {
+              "event": "pull_request",
+              "head_sha": os.environ["EXPECTED_HEAD_SHA"],
+              "repository": os.environ["EXPECTED_REPOSITORY"],
+              "pull_request": int(os.environ["EXPECTED_PR"]),
+          }
+          if value != expected:
+              sys.exit("producer context mismatch")
+          print(f"verified untrusted artifact for {value['head_sha']}")
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: queryspend-manifests-verified
+          path: queryspend-input
+          if-no-files-found: error
+          retention-days: 1
+
+  queryspend-cost:
+    name: queryspend/cost
+    needs: verify-input
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      pull-requests: write
+    # Configure this protected environment with required reviewers and prevent self-review.
+    # Inspect verify-input's exact head SHA before approving the credentialed dry-run.
+    environment: queryspend-cost
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: queryspend-manifests-verified
+          path: queryspend-input
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093
+        with:
+          workload_identity_provider: projects/123456789/locations/global/workloadIdentityPools/github/providers/queryspend
+          service_account: queryspend-ci@YOUR_PROJECT.iam.gserviceaccount.com
+      - name: Evaluate sanitized manifests as data
+        uses: ./
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          QUERYSPEND_PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          QUERYSPEND_PR_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          QUERYSPEND_PR_HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+          QUERYSPEND_PR_BASE_REPO: ${{ github.repository }}
+        with:
+          base_manifest: queryspend-input/base/manifest.json
+          head_manifest: queryspend-input/head/manifest.json
+          config: .queryspend.yml
+          report_path: queryspend-report.json
+          comment: "true"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: queryspend-report
+          path: queryspend-report.json
+          if-no-files-found: warn
+          retention-days: 30
