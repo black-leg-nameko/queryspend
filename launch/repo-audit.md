@@ -5,12 +5,12 @@
 - Primary language/category: Python
 - UI contract: **N/A — CLI/composite Action only; no Web or mobile UI and no `DESIGN.md`**
 - Final repository verdict: **SHIP — public repository, hosted CI, full-history secret scan,
-  Gate C, and v0.1.0 release checks pass**
+  Gate C, and current v0.1.1 release checks pass**
 
-The public repository and v0.1.0 GitHub Release were verified on 2026-08-11 after explicit user
-approval. Live BigQuery ADC, hosted workflow-run/OIDC validation, social-preview upload, starter
-issues, and human-owned launch-channel posts remain separate follow-ups and are not reported as
-complete.
+The public repository, initial v0.1.0 release, and corrective v0.1.1 security-maintenance release
+were verified on 2026-08-11 after explicit user approval. Live BigQuery ADC, hosted
+workflow-run/OIDC validation, social-preview upload, starter issues, and human-owned launch-channel
+posts remain separate follow-ups and are not reported as complete.
 
 ## Measured time to value
 
@@ -43,7 +43,7 @@ headroom against the 60-second gate.
 | LICENSE matches package metadata | Pass | Apache-2.0 in `LICENSE` and `pyproject.toml` |
 | Full-history gitleaks scan | Pass | Local complete-history scan found 0 leaks; hosted CI uses pinned gitleaks 8.24.3 and passed on the release source history. |
 | No personal/internal information | Pass | Working-tree and full-history scans found no credential, client name, internal URL, `.env`, or raw SQL artifact. |
-| CI green on default branch; badge matches | Pass | Hosted `main` run [31469012029](https://github.com/black-leg-nameko/queryspend/actions/runs/31469012029) passed the secret, quality, and Python 3.11–3.13 jobs; README shows its live badge. |
+| CI green on default branch; badge matches | Pass | Latest hosted `main` run [31471049688](https://github.com/black-leg-nameko/queryspend/actions/runs/31471049688) passed the secret, quality, and Python 3.11–3.13 jobs; README shows its live badge. |
 | Description configured, ≤120 chars, searchable | Pass | Applied description recorded in `launch/metadata.md`. |
 | Defensive security review complete | Pass | `docs/SECURITY_REVIEW.md`: 0 open Critical/High and 0 open code-level Medium findings. |
 | User confirms public publication | Pass | Explicit commit, push, and release instruction received on 2026-08-11. |
@@ -58,8 +58,8 @@ headroom against the 60-second gate.
 | Bug/feature templates + PR template | Pass | `.github/` templates include privacy/security routing |
 | SECURITY private route | Pass | Private vulnerability reporting is enabled; advisory link and 72-hour acknowledgement target are published. |
 | 5–10 good first issues | Prepared, not opened | Six scoped candidates in `docs/GOOD_FIRST_ISSUES.md`; opening issues is external |
-| Tag → release automation | Pass hosted | Release run [31469203644](https://github.com/black-leg-nameko/queryspend/actions/runs/31469203644) built, checked, attested, and uploaded both distributions. |
-| Versioned v0.1.0 release | Pass | Annotated unsigned tag and [GitHub Release](https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0) published; both asset attestations verified. |
+| Tag → release automation | Pass hosted | Current release run [31471163770](https://github.com/black-leg-nameko/queryspend/actions/runs/31471163770) built, checked, attested, and uploaded both distributions. |
+| Current versioned release | Pass | Annotated unsigned tag and [v0.1.1 GitHub Release](https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.1) published; both asset attestations verified. v0.1.0 remains immutable history. |
 | Honest named comparison | Pass | README compares dry-run, dbt CI, post-deploy billing, and queryspend |
 | Reproducible claimed metrics | Pass | Synthetic evaluator is explicitly not a live accuracy claim; reproduction command included |
 | Docs for config surface | Pass | Action, roadmap, release, security, schemas, examples |
@@ -89,11 +89,11 @@ uv build / twine / clean wheel / hash-locked Action harness
   pass / both distributions pass / pass / pass
 
 hosted main CI / release workflow / provenance
-  run 31469012029 pass / run 31469203644 pass / wheel and sdist attestations present
+  run 31471049688 pass / run 31471163770 pass / wheel and sdist attestations present
 
-published artifacts
-  wheel SHA-256: 68b847f7a30f5fc98a69f54202ad84665a521f898f48d4a7527869f75c2f854c
-  sdist SHA-256: c908f5af7608170d0a13749313ed01957e740a7ac4b207e488cbd356fb256a8d
+published v0.1.1 artifacts
+  wheel SHA-256: b2f3d2fddb29cf92d265ff46f132ac14dafa92cafe98dec9205e85200b795662
+  sdist SHA-256: 5f830480893f321f7bc65e6aff4c88cbf9b32a8e918d92a589dd48d544f26a7e
 
 demo asset
   149 frames; 5.96s; 1200×760; 144,739 bytes
@@ -106,7 +106,8 @@ The final test, package, link, secret, and security results are recorded in
 ## Finalization rule
 
 Gate C and the public-release audit are `PASS`: every finding is resolved, hosted `main` CI is
-green, the full release history is secret-scanned, and the published wheel installs and runs the
-credential-free demo. The tag is annotated but unsigned because no signing key was available;
-GitHub provenance attestations exist for both release assets. Live ADC/OIDC results, social-preview
-upload, and launch-channel posts must still not be inferred from this evidence.
+green, the full release history is secret-scanned, and the published v0.1.1 wheel installs and runs
+the credential-free demo. The tags are annotated but unsigned because no signing key was
+available; GitHub provenance attestations exist for both current release assets. Live ADC/OIDC
+results, social-preview upload, and launch-channel posts must still not be inferred from this
+evidence.

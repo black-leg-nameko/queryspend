@@ -129,8 +129,9 @@ The final reproducible command transcript is in
 - fresh-venv hash-locked Action harness and clean-wheel demo: passed;
 - `pip-audit`: no known vulnerabilities;
 - working-tree and full-history gitleaks plus public Markdown link checks: passed;
-- hosted `main` CI run 31469012029 and release run 31469203644: passed;
-- published wheel/sdist attestations and clean release-wheel demo: verified.
+- hosted `main` CI run 31471049688 and v0.1.1 release run 31471163770: passed;
+- Dependabot alert 1 for CVE-2025-71176: fixed, not dismissed;
+- published v0.1.1 wheel/sdist attestations and clean release-wheel demo: verified.
 
 Gate C and repository publication checks are complete. They do not erase the live ADC/OIDC limits
 above and do not authorize Product Hunt, Hacker News, Reddit, X, LinkedIn, or other social posts.

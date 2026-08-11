@@ -15,6 +15,8 @@ expose an upload endpoint for it.
   scanning push protection, and Dependabot security updates
 - Initial release: [`v0.1.0`](https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0),
   published 2026-08-11 after explicit approval and the release preflight
+- Current release: [`v0.1.1`](https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.1),
+  a security-maintenance update for the optional pytest development dependency
 
 Product Hunt, Hacker News, Reddit, X, and LinkedIn publication is still human-owned and was not
 performed as part of the repository release.

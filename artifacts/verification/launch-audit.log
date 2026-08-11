@@ -92,3 +92,12 @@ release=https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0
 release_workflow_run=31469203644 result=PASS
 release_assets=wheel,sdist provenance=verified
 public_clone_demo=PASS elapsed_seconds=4 credentials=none
+
+CURRENT RELEASE VERIFICATION
+release=https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.1
+purpose=patch optional pytest development dependency CVE-2025-71176
+dependabot_alert_1=fixed dismissed=no
+main_ci_run=31471049688 result=PASS
+release_workflow_run=31471163770 result=PASS
+release_assets=wheel,sdist provenance=verified
+release_wheel_install_demo=PASS version=0.1.1

@@ -34,8 +34,8 @@ credentialed checks.
 ## Release and publication
 
 - [x] Obtain explicit user approval for public push/tag/release.
-- [x] Publish annotated `v0.1.0`; verify release workflow provenance and artifacts. The tag is
-  unsigned because no signing key was available.
+- [x] Publish annotated `v0.1.0` and corrective `v0.1.1`; verify release workflow provenance and
+  artifacts. The tags are unsigned because no signing key was available.
 - [x] Install the release wheel cleanly and run the demo.
 - [ ] Execute `docs/LAUNCH.md` only through human-owned channel accounts; never request upvotes or
   coordinate artificial engagement.

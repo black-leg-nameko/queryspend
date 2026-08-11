@@ -350,7 +350,7 @@ sequence:
 Before publication, set the description and ten topics exactly as recorded in
 `launch/metadata.md`, upload `assets/social-preview.png`, enable Issues/Discussions/private
 vulnerability reporting, and replace the configured badge with the real hosted `main` status only
-after it is green. Publish `v0.1.0` from a reviewed immutable commit and use that commit SHA in the
+after it is green. Use `v0.1.1` from its reviewed immutable commit and use that commit SHA in the
 Action example. Do not use a mutable tag as a security boundary.
 
 Track conversion with native referrers where available. Do not add telemetry to the CLI for the
@@ -406,11 +406,11 @@ stop repeating tactics whose referred users do not run, open issues, or return.
 |---|---|---|
 | Aug 11 (T−14) | Freeze positioning; start daily Trending log; reserve human response coverage | This plan plus first calibration row |
 | Aug 11 (completed early) | Create the public repository with explicit user approval; run full-history gitleaks; configure metadata and private reporting | Complete: no leaks; metadata and reporting route verified |
-| Aug 11 (completed early) | Run hosted Python 3.11–3.13 CI and the release workflow | Complete: `main` and v0.1.0 release workflows green |
+| Aug 11 (completed early) | Run hosted Python 3.11–3.13 CI and the release workflow | Complete: `main`, v0.1.0, and corrective v0.1.1 workflows green |
 | Aug 17–18 | Run isolated BigQuery ADC and hosted Action/OIDC tests if credentials and a protected environment are authorized | Capture sanitized audit evidence; otherwise retain alpha caveat |
 | Aug 18 (T−7) | Recheck PH/HN/Reddit rules; send one r/bigquery modmail; maker begins human PH/HN notes | Any material rule conflict removes channel |
 | Aug 19–20 | Build PH thumbnail/gallery derivatives; native-size and mobile QA; verify alt text | No clipped text or missing synthetic disclosure |
-| Aug 11 (completed early) | Publish v0.1.0 with explicit approval; fresh-install smoke; verify hosted provenance | Complete: wheel/sdist and one attestation per asset verified |
+| Aug 11 (completed early) | Publish v0.1.0 and corrective v0.1.1 with explicit approval; fresh-install smoke; verify hosted provenance | Complete: current wheel/sdist and one attestation per asset verified |
 | Aug 22 | Create PH draft; verify direct GitHub URL, price, alpha status, and preview | Draft only; no accidental immediate launch |
 | Aug 23 (T−2) | Final Trending recalibration; human rewrites PH/HN comments; dry-run day-of checklist | Human confirms no AI comment text |
 | Aug 24 (T−1) | Freeze code except security/release blockers; link/secret/quickstart check; rest response team | Any Critical/High or broken install postpones |
@@ -499,7 +499,7 @@ The human launch owner signs this at T−48 hours and again at T−2 hours.
 - [x] Public repository exists at the exact URLs used in all drafts
 - [x] Full-history `gitleaks git .` passes over the published history
 - [x] Hosted `main` CI is green on Python 3.11, 3.12, and 3.13
-- [x] `v0.1.0` wheel/sdist install, hashes, `twine check`, and provenance verify
+- [x] Current `v0.1.1` wheel/sdist install, hashes, `twine check`, and provenance verify
 - [x] README public clone → `uv run queryspend demo` succeeds in under 60 seconds
 - [x] GitHub description, topics, license, Issues, Discussions, and private reporting are visible
 - [ ] Upload and verify the GitHub social preview through repository settings
@@ -517,9 +517,9 @@ The human launch owner signs this at T−48 hours and again at T−2 hours.
 - [ ] r/bigquery mod approval received, or that channel remains skipped
 
 If a must-green item fails, move the entire channel launch rather than publishing partial or broken
-links. Do not infer live integration success from repository checks. The repository and v0.1.0 were
-published under the user's 2026-08-11 instruction; this plan still does not authorize any social
-post.
+links. Do not infer live integration success from repository checks. The repository, v0.1.0, and
+corrective v0.1.1 were published under the user's 2026-08-11 instruction; this plan still does not
+authorize any social post.
 
 ## Day-of operator checklist
 
