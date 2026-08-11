@@ -9,8 +9,9 @@
 - Production status: **Alpha — live BigQuery ADC/OIDC and a GitHub-hosted Action run remain
   unverified**
 
-This review used the repository at its pre-initial-commit state. It is a source-tree review, not a
-claim that a future hosted configuration or deployment is secure. No third-party system was tested.
+The original review used the repository at its pre-initial-commit state. Publication checks and the
+post-publication dependency finding below were added from the public repository. This is not a
+claim that a future hosted credentialed deployment is secure. No third-party target was tested.
 
 ## Threat model
 
@@ -48,6 +49,7 @@ exploitability in the documented workflow, not the theoretical worst case.
 | QS-SEC-005 | Medium | The composite Action installed runtime version ranges without hashes, allowing dependency drift at execution time. | `action.yml:39-45`; `requirements-action.txt` | Added an exact, hash-locked runtime export and install with `pip --require-hashes`; the Action executes reviewed source via `PYTHONPATH`. A fresh-venv installation and Action harness passed. External Actions are pinned to 40-character SHAs. | Fixed |
 | QS-SEC-006 | Low | A malformed saved report could echo attacker-controlled validation content into CLI logs. | `queryspend/cli.py:98-115`; `tests/test_cli_validation.py:27-35` | Invalid-report output is now a fixed schema message that does not include parsed values. | Fixed |
 | QS-SEC-007 | Low | The PR-comment transport accepted any HTTPS API base from environment, which could forward `GITHUB_TOKEN` if the environment were misconfigured. | `queryspend/github_action.py:144-259`; `tests/test_github_action.py:65-70` | Bind requests to GitHub's expected API host, reject URL credentials/fragments/non-HTTPS, validate repository/PR/SHA, bound event/API bodies, and re-check the live PR head SHA before commenting. | Fixed |
+| QS-SEC-008 | Medium | GitHub's post-publication dependency scan found CVE-2025-71176 in the locked pytest 8.4.2 development dependency. On multi-user UNIX hosts, vulnerable pytest temporary-directory handling could allow local denial of service or privilege impact. | `pyproject.toml`; `uv.lock` | Raised the optional development constraint to pytest 9.0.3 or newer and locked 9.1.1. The runtime wheel never installs pytest. The 75-test suite, full development-dependency audit, and Action-runtime audit pass after the update. | Fixed |
 
 Open finding count after re-review: Critical 0, High 0, Medium 0, Low 0.
 
@@ -77,7 +79,7 @@ Open finding count after re-review: Critical 0, High 0, Medium 0, Low 0.
 | XSS/CSRF/SSRF | N/A | No browser UI, state-changing HTTP endpoint, or user-supplied URL fetch. Markdown is rendered as text for a GitHub comment and contains no raw SQL/provider content. |
 | CORS/CSP/security headers | N/A | No HTTP service or browser surface. |
 | Rate limiting/abuse | N/A locally | No public service. BigQuery calls have a 30-second timeout, three attempts only for 429/5xx, and per-run caching. GitHub Action jobs have 5/10-minute limits. |
-| Dependency/supply chain | Clear at review time | `uv.lock` is present; runtime Action dependencies are exact and hashed; `pip-audit -r requirements-action.txt` reported no known vulnerabilities; workflow Actions use full SHAs; release produces provenance attestations. |
+| Dependency/supply chain | Clear at review time | `uv.lock` is present; pytest is patched to 9.1.1; full development and Action-runtime audits report no known vulnerabilities; runtime Action dependencies are exact and hashed; workflow Actions use full SHAs; releases produce provenance attestations. |
 | Privacy/logging | Clear after fixes | No telemetry endpoint. Fixed provider/config/report diagnostics discard secrets and attacker values. Generated reports/logs were scanned for fixture SQL/literals. |
 | Payments/webhooks | N/A | No payments, pricing transaction, or webhook handler. |
 | File upload | N/A as a service | No upload endpoint. Local/Action artifact files are treated as untrusted and bounded before parsing. |

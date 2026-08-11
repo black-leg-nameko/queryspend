@@ -17,10 +17,11 @@ Only maintainers release. Never publish from an unreviewed pull-request checkout
 ## Build and tag
 
 ```bash
+release_tag=v0.1.1
 uv build
 uvx twine check dist/*
-git tag -s v0.1.0 -m "queryspend v0.1.0"
-git push origin v0.1.0
+git tag -s "$release_tag" -m "queryspend $release_tag"
+git push origin "$release_tag"
 ```
 
 Pushing a `v*` tag starts `.github/workflows/release.yml`, rebuilds from the trusted tag, checks the

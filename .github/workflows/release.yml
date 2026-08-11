@@ -60,8 +60,10 @@ jobs:
       - name: Create immutable GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create "$GITHUB_REF_NAME" dist/*
-          --verify-tag
-          --notes-file docs/RELEASE_NOTES_v0.1.0.md
-          --title "queryspend $GITHUB_REF_NAME"
+        run: |
+          notes_file="docs/RELEASE_NOTES_${GITHUB_REF_NAME}.md"
+          test -f "$notes_file"
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --verify-tag \
+            --notes-file "$notes_file" \
+            --title "queryspend $GITHUB_REF_NAME"

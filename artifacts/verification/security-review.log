@@ -7,7 +7,7 @@ critical_open=0
 high_open=0
 medium_code_open=0
 low_open=0
-fixed=7 (High 1, Medium 4, Low 2)
+fixed=8 (High 1, Medium 5, Low 2)
 report=docs/SECURITY_REVIEW.md
 
 PYTHON MATRIX
@@ -86,3 +86,11 @@ sdist_sha256=c908f5af7608170d0a13749313ed01957e740a7ac4b207e488cbd356fb256a8d
 provenance_attestations=1_per_asset
 release_wheel_install_demo=PASS
 remaining=live BigQuery ADC/audit evidence and hosted workflow_run/OIDC/protected Action
+
+POST-PUBLICATION DEPENDENCY FOLLOW-UP
+alert=GHSA-6w46-j5rx-g56g / CVE-2025-71176 severity=Medium dependency=pytest
+affected_lock=pytest 8.4.2 scope=optional development dependency runtime_wheel_affected=no
+fix=constraint pytest>=9.0.3,<10 lock=pytest 9.1.1
+tests=75 passed coverage=90.69% ruff=PASS strict_mypy=PASS
+full_development_dependency_audit=PASS (0 known vulnerabilities)
+action_runtime_dependency_audit=PASS (0 known vulnerabilities)
