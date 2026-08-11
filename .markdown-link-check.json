@@ -1,0 +1,16 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^https://github.com/queryspend/queryspend/(security/advisories/new|discussions)$"
+    },
+    {
+      "pattern": "^https://github.com/queryspend/queryspend$"
+    },
+    {
+      "pattern": "^https://www.reddit.com/r/(finops|dataengineering|bigquery|dbt)/about(\\/rules)?\\.json$"
+    },
+    {
+      "pattern": "^\\./(ai-governance|cross-category|enterprise-ops|infra-economics|security-compliance)\\.md$"
+    }
+  ]
+}

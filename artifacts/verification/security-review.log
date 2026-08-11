@@ -1,0 +1,73 @@
+queryspend Gate C defensive review closure
+date: 2026-08-11 JST
+scope: local source tree; no remote, hosted CI, ADC, OIDC, or third-party target
+
+FINDINGS
+critical_open=0
+high_open=0
+medium_code_open=0
+low_open=0
+fixed=7 (High 1, Medium 4, Low 2)
+report=docs/SECURITY_REVIEW.md
+
+PYTHON MATRIX
+python=3.11.15 tests=75 passed coverage=90.64% threshold=90% result=PASS
+python=3.12.13 tests=75 passed coverage=90.69% threshold=90% result=PASS
+python=3.13.14 tests=75 passed coverage=90.69% threshold=90% result=PASS
+note: Python 3.11 initially exposed a deep-JSON exception-message portability regression;
+      fail-closed behavior was retained, the message normalized, and all three versions rerun.
+
+STATIC AND WORKFLOW
+uv lock --check: PASS (78 packages resolved)
+runtime lock regeneration/content comparison: PASS
+ruff check .: PASS
+mypy queryspend --strict project config: PASS (24 source files)
+actionlint CI/release/example workflows: PASS
+
+DEPENDENCIES AND SECRETS
+pip-audit 2.10.1 -r requirements-action.txt: PASS (0 known vulnerabilities)
+gitleaks dir . --no-banner --redact: PASS (2.53 MB scanned, no leaks)
+full-history gitleaks: NOT RUN (repository has zero commits; external publication preflight)
+
+LINKS
+markdown-link-check: PASS (21 public Markdown files after docs/LAUNCH.md)
+known exclusions: the five relative research-source links in canonical docs/THESIS.md are not
+bundled in this product repository; THESIS.md was intentionally not rewritten. Planned GitHub
+Security Advisory/Discussions URLs are also ignored until the remote exists.
+
+PACKAGE
+uv build: PASS
+twine check dist/*: PASS (wheel and sdist)
+wheel Core Metadata: 2.4
+sdist Core Metadata: 2.4
+clean Python 3.13 wheel install + credential-free demo: PASS
+
+ACTION
+fresh Python 3.13 venv
+pip --require-hashes requirements-action.txt: PASS
+source preflight + identical-manifest check + finalize: PASS
+GitHub output decision=pass; summary rendered
+
+SECURITY INVARIANTS
+sole BigQuery client.query call uses QueryJobConfig(dry_run=True, use_query_cache=False)
+no QueryJob.result() or row retrieval path found
+stale/symlink report and input-path regressions: PASS in full test matrix
+
+VERDICT
+Gate C code/repository-preparation controls: PASS
+External hosted/live validation and explicit publication consent: PENDING, not simulated
+
+FINAL POST-LAUNCH-DOCUMENT RECHECK
+date: 2026-08-11 JST
+Python 3.14 local suite: 75 passed, 90.69% coverage (matrix evidence above remains 3.11-3.13)
+ruff: PASS
+strict mypy: PASS (24 source files)
+actionlint 1.7.7: PASS (CI, release, and example workflows)
+uv lock --check: PASS (78 packages)
+pip-audit 2.10.1: PASS (0 known vulnerabilities)
+public Markdown links: PASS (21 files; .pytest_cache excluded)
+gitleaks working tree: PASS (2.53 MB, no leaks)
+uv build + twine: PASS
+clean Python 3.13.14 wheel demo: PASS (SIMULATED disclosure and WARN result verified)
+clean Python 3.13.14 hash-locked Action harness: PASS (decision=pass)
+launch asset audit: artifacts/verification/launch-audit.log

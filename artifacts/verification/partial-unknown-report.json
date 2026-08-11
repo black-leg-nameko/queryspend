@@ -1,0 +1,102 @@
+{
+  "diagnostics": [],
+  "events": [
+    {
+      "name": "check_started",
+      "properties": {
+        "affected_count": 1,
+        "manifest_versions": "10,12",
+        "run_id": "db76a887-16a1-4ebf-9098-8ba4b2ba2d61"
+      }
+    },
+    {
+      "name": "check_completed",
+      "properties": {
+        "confidence": "unknown",
+        "decision": "warn",
+        "duration_ms": 1,
+        "known_count": 0,
+        "unknown_count": 1
+      }
+    }
+  ],
+  "inputs": {
+    "base_manifest_sha256": "9716c6adc50bd65e9478604d7a56faeecc6d67a0d1610a388ce5e10a4b5c1abc",
+    "billing_model": "on_demand",
+    "billing_project": null,
+    "dbt_manifest_versions": [
+      10,
+      12
+    ],
+    "head_manifest_sha256": "6ae4620de9e23e8018688cc121da66ef587cc38fae2f9dd3a23a194ebad87c40",
+    "location": null,
+    "price_per_tib_usd": null,
+    "provider": "bigquery"
+  },
+  "models": [
+    {
+      "affected_reason": "changed",
+      "base": null,
+      "base_materialization": "view",
+      "change_type": "modified",
+      "confidence": "unknown",
+      "display_name": "orders_view",
+      "fingerprint_base": "4dc957ba2ab92db705693a4ac6e769e71fbc5bfa9f43703dbadda32253190cd7",
+      "fingerprint_head": "bc9f26e5263a915cedd18f20d30c2417e8100146784025c6677035cabbbc344e",
+      "frequency_source": null,
+      "head": null,
+      "head_materialization": "view",
+      "monthly_bytes_delta": null,
+      "monthly_cost_delta_usd": null,
+      "reason_codes": [
+        "unknown_view_consumer_cost"
+      ],
+      "runs_per_month": null,
+      "status": "unknown",
+      "unique_id": "model.state_fixture.orders_view"
+    }
+  ],
+  "policy": {
+    "actuals": {
+      "gross_monthly_increase_bytes": "0",
+      "gross_monthly_increase_usd": "0",
+      "unknown_models": 1
+    },
+    "decision": "warn",
+    "reason": "unknown_models_present",
+    "thresholds": {
+      "max_monthly_delta_bytes": null,
+      "max_monthly_delta_usd": null,
+      "minimum_confidence": "high"
+    }
+  },
+  "privacy": {
+    "model_names_included": true,
+    "relation_names_included": false,
+    "sql_included": false
+  },
+  "run": {
+    "case_id": null,
+    "duration_ms": 1,
+    "id": "db76a887-16a1-4ebf-9098-8ba4b2ba2d61",
+    "queryspend_version": "0.1.0",
+    "simulated": false,
+    "started_at": "2026-08-11T04:07:37.989959Z"
+  },
+  "schema": "https://queryspend.dev/schemas/report/v1.json",
+  "schema_version": 1,
+  "summary": {
+    "affected_models": 1,
+    "complete": false,
+    "confidence": "unknown",
+    "error_models": 0,
+    "gross_monthly_decrease_usd": null,
+    "gross_monthly_increase_usd": null,
+    "known_models": 0,
+    "known_monthly_bytes_delta": null,
+    "known_monthly_delta_usd": null,
+    "largest_known_contributor": null,
+    "unknown_models": 1,
+    "unsupported_models": 0
+  }
+}

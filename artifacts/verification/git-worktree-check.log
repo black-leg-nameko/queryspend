@@ -1,0 +1,24 @@
+$ git diff --check
+GIT_DIFF_CHECK_EXIT_CODE=0
+$ git status --short
+?? .github/
+?? .gitignore
+?? LICENSE
+?? README.md
+?? action.yml
+?? artifacts/
+?? docs/
+?? examples/
+?? fixtures/
+?? pyproject.toml
+?? queryspend/
+?? schemas/
+?? scripts/
+?? tests/
+?? uv.lock
+?? validation/
+$ sha256sum docs/THESIS.md docs/SPEC.md
+5337ef9b180ccf53c3d7766f9b3274720a860425363ff61cc47dd06d6b276020  docs/THESIS.md
+05c903bddbc80be5afd4c9558bf21aeca574bf6bd402d54b2fc7ef4c7377e6f2  docs/SPEC.md
+CANONICAL_DOCS_EDITED_BY_BUILDER=NO
+NOTE=repository has no commits; implementation files are untracked, so git diff --check has no tracked baseline

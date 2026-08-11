@@ -1,0 +1,4 @@
+decision=pass
+known_monthly_delta_usd=
+confidence=unknown
+report_path=artifacts/verification/action-nochange-report.json

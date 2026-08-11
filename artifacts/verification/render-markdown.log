@@ -1,0 +1,23 @@
+$ uv run queryspend render --input artifacts/verification/partial-unknown-report.json --format markdown
+<!-- queryspend-report:v1 -->
+## queryspend cost estimate
+
+> Estimate, not an invoice. Unknown values are never treated as $0.
+
+**Decision:** `WARN` — unknown_models_present  
+**Cost:** Unknown — no complete USD estimate  
+**Coverage:** 0 known / 1 affected; 1 not known  
+**Confidence:** `unknown`  
+**USD threshold:** `not configured`
+
+<details>
+<summary>Model evidence and uncertainty</summary>
+
+| Model | Change | Monthly delta | Confidence | Status |
+|---|---|---:|---|---|
+| `model.state_fixture.orders_view` | modified | Unknown — unknown_view_consumer_cost | unknown | UNKNOWN |
+
+</details>
+
+Full evidence: `queryspend-report.json`
+EXIT_CODE=0

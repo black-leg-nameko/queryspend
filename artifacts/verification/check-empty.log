@@ -1,0 +1,17 @@
+$ uv run queryspend check --base fixtures/northstar/base/manifest.json --head fixtures/northstar/base/manifest.json --config fixtures/northstar/queryspend.yml --output artifacts/verification/empty-report.json
+QUERYSPEND — ESTIMATE, NOT AN INVOICE
+Decision: PASS (no changed models)
+Known monthly change: +0.00 USD/month (no model changes)
+Coverage: 0 known / 0 affected; 0 not known
+Confidence: unknown
+Largest known contributor: none (no changed models)
+
+Model                                      Change       Monthly delta       Confidence  Status
+------------------------------------------------------------------------------------------------------------
+
+Diagnostics:
+- identical_inputs: Base and head manifest contents are identical.
+- no_changed_models: No cost-affecting model changes were found.
+
+Estimates use explicit frequency and price; unknown values are never treated as $0.
+EXIT_CODE=0

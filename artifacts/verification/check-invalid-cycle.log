@@ -1,0 +1,3 @@
+$ uv run queryspend check --base fixtures/states/cycle/manifest.json --head fixtures/states/cycle/manifest.json --output artifacts/verification/cycle-report.json
+queryspend: Manifest graph cycle: model.cycle_fixture.a -> model.cycle_fixture.b -> model.cycle_fixture.a
+EXIT_CODE=2

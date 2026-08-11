@@ -1,0 +1,28 @@
+$ python -m queryspend.github_action preflight <base> <head> <config> --output artifacts/verification/action-nochange-report.json
+PREFLIGHT_EXIT_CODE=0
+$ queryspend check <base> <head> <config> --output artifacts/verification/action-nochange-report.json --no-progress
+QUERYSPEND — ESTIMATE, NOT AN INVOICE
+Decision: PASS (no changed models)
+Known monthly change: +0.00 USD/month (no model changes)
+Coverage: 0 known / 0 affected; 0 not known
+Confidence: unknown
+Largest known contributor: none (no changed models)
+
+Model                                      Change       Monthly delta       Confidence  Status
+------------------------------------------------------------------------------------------------------------
+
+Diagnostics:
+- identical_inputs: Base and head manifest contents are identical.
+- no_changed_models: No cost-affecting model changes were found.
+
+Estimates use explicit frequency and price; unknown values are never treated as $0.
+CHECK_EXIT_CODE=0
+$ python -m queryspend.github_action finalize --report artifacts/verification/action-nochange-report.json --comment false
+FINALIZE_EXIT_CODE=0
+ACTION_OUTPUTS:
+decision=pass
+known_monthly_delta_usd=
+confidence=unknown
+report_path=artifacts/verification/action-nochange-report.json
+ACTION_REPORT_EVENT:
+{'name': 'comment_published', 'properties': {'result': 'skipped', 'same_repo': False}}

@@ -1,0 +1,14 @@
+$ uv build
+Building source distribution...
+Building wheel from source distribution...
+Successfully built dist/queryspend-0.1.0.tar.gz
+Successfully built dist/queryspend-0.1.0-py3-none-any.whl
+BUILD_EXIT_CODE=0
+     4631  02-02-2020 00:00   queryspend/renderers/terminal.py
+    11616  02-02-2020 00:00   queryspend-0.1.0.dist-info/METADATA
+       87  02-02-2020 00:00   queryspend-0.1.0.dist-info/WHEEL
+       50  02-02-2020 00:00   queryspend-0.1.0.dist-info/entry_points.txt
+    11357  02-02-2020 00:00   queryspend-0.1.0.dist-info/licenses/LICENSE
+     2840  02-02-2020 00:00   queryspend-0.1.0.dist-info/RECORD
+---------                     -------
+   144253                     34 files

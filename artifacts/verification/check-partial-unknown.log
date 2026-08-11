@@ -1,0 +1,15 @@
+$ uv run queryspend check --base fixtures/states/view/base/manifest.json --head fixtures/states/view/head/manifest.json --output artifacts/verification/partial-unknown-report.json
+QUERYSPEND — ESTIMATE, NOT AN INVOICE
+Decision: WARN (unknown models present)
+Known monthly change: Unknown (no complete USD estimate)
+Coverage: 0 known / 1 affected; 1 not known
+Confidence: unknown
+Largest known contributor: none
+
+Model                                      Change       Monthly delta       Confidence  Status
+------------------------------------------------------------------------------------------------------------
+model.state_fixture.orders_view          modified     Unknown             unknown     UNKNOWN
+  Reasons: unknown_view_consumer_cost
+
+Estimates use explicit frequency and price; unknown values are never treated as $0.
+EXIT_CODE=0

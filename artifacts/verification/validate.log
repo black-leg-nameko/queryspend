@@ -1,0 +1,39 @@
+$ uv run queryspend validate --predictions 'validation/predictions/*.json' --observations validation/observations.jsonl --output artifacts/verification/validation-report.json
+{
+  "decision": "pass",
+  "evaluated_at": "2026-08-11T04:08:17.501461Z",
+  "events": [
+    {
+      "name": "validation_evaluated",
+      "properties": {
+        "attribution_percent": "99.285714",
+        "corpus_size": 10,
+        "decision": "pass",
+        "false_blocker_percent": "0.000000",
+        "median_ape_percent": "4.500000",
+        "p90_ape_percent": "5.555556"
+      }
+    }
+  ],
+  "failed_criteria": [],
+  "metrics": {
+    "absolute_error_usd": "121.000000",
+    "actual_non_block_cases": 10,
+    "corpus_cases": 10,
+    "cost_weighted_attribution_percent": "99.285714",
+    "coverage_percent": "88.888889",
+    "eligible_ape_cases": 8,
+    "excluded_small_actual_cases": 1,
+    "false_blocker_percent": "0.000000",
+    "false_blockers": 0,
+    "median_ape_percent": "4.500000",
+    "observations": 10,
+    "p90_ape_percent": "5.555556",
+    "unknown_prediction_cases": 1
+  },
+  "profile": "technical-gate-v1",
+  "schema": "https://queryspend.dev/schemas/validation/v1.json",
+  "schema_version": 1
+}
+EXIT_CODE=0
+CORPUS_CLASSIFICATION=synthetic_fixture_not_live

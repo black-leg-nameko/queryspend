@@ -1,0 +1,85 @@
+queryspend distribution launch audit
+date: 2026-08-11 JST
+document: docs/LAUNCH.md
+publication: NOT PERFORMED
+
+LAUNCH ASSET
+result=PASS
+lines=558
+recommended_anchor=2026-08-25 00:01 PT (PDT) / 07:01 UTC / 16:01 JST
+primary_trending_category=Python
+ph_tagline_chars=59
+ph_description_chars=252 (limit 260)
+timezone_conversion=PASS (America/Los_Angeles, UTC, Asia/Tokyo tzdata)
+
+CHANNEL COVERAGE
+Product Hunt listing and media QA: PRESENT
+Product Hunt human-only maker comment worksheet: PRESENT
+Show HN three-title comparison and preferred rationale: PRESENT
+Show HN human-only first-comment worksheet: PRESENT
+Reddit per-community rules/fit/decision: PRESENT
+r/FinOps disclosed draft: PRESENT, conditional on launch-day rule recheck
+r/dataengineering: NO-GO (current prohibition on heavily AI-assisted text)
+r/bigquery: CONDITIONAL, moderator approval required; T+7 earliest
+r/DBT: NO-GO, wrong topic
+X launch and technical drafts: PRESENT
+LinkedIn draft: PRESENT
+48-hour concentrated runbook: PRESENT
+T-14 through T-1 and T+1 through T+14: PRESENT
+day-of/go-no-go/incident checklists: PRESENT
+
+PLATFORM EVIDENCE OPENED 2026-08-11 JST
+Product Hunt posting/commenting/community/featuring help: PASS
+Hacker News Show HN/guidelines/FAQ: PASS
+Reddit official about and rules metadata: PASS via research client;
+  direct link checker receives 403, so these exact official JSON URLs are documented exclusions
+GitHub weekly all-language and Python Trending pages: PASS
+GitHub discovery documentation: PASS
+
+TRENDING SNAPSHOT
+weekly_all_language_visible_entries=15
+weekly_all_language_visible_low=503
+weekly_python_visible_entries=15
+weekly_python_visible_range=33..4113
+planning_python_7d=200 (working range 150..250; recalibrate daily T-14..T-1)
+stretch_all_language_7d=600+
+claim_status=observed_snapshot_and_studio_hypothesis_not_GitHub_threshold
+
+ETHICS AND CLAIMS
+upvote/star/comment solicitation=PROHIBITED
+fake engagement/bots/engagement pods/mass DM/spam=PROHIBITED
+synthetic demo as live accuracy=PROHIBITED
+live ADC/OIDC/hosted Action claims=PROHIBITED until verified
+HN generated or AI-edited comments=PROHIBITED; human worksheet only
+PH AI-generated comments=PROHIBITED; human worksheet only
+external publication commands=NOT RUN
+
+FINAL LOCAL RECHECK
+Python 3.14 tests=75 passed coverage=90.69% threshold=90%
+Python 3.11-3.13 matrix=75 passed each coverage=90.64/90.69/90.69%
+ruff=PASS
+strict_mypy=PASS (24 source files)
+actionlint_1.7.7=PASS
+uv_lock=PASS (78 packages)
+pip_audit_2.10.1=PASS (0 known vulnerabilities)
+markdown_links=PASS (21 public Markdown files)
+gitleaks_dir=PASS (2.53 MB, 0 leaks)
+build_twine=PASS
+clean_wheel_python=3.13.14 result=PASS disclosure=SIMULATED decision=WARN
+clean_action_python=3.13.14 hash_locked_install=PASS result=PASS decision=pass
+
+LOCAL VERDICT
+repository_audit=PASS for controllable preparation
+security_gate_c=PASS (open Critical/High/Medium/Low=0)
+launch_document=PASS
+design_md=N/A (CLI and composite GitHub Action; no Web UI)
+
+EXTERNAL PENDING
+- repository/remote/initial commit and explicit publication consent
+- full-history gitleaks scan after history exists
+- public hosted main CI and immutable v0.1.0 release/provenance
+- GitHub description/topics/social preview/Issues/Discussions/private reporting
+- isolated-project BigQuery ADC result and audit-log evidence
+- GitHub-hosted workflow_run/OIDC/protected-environment Action result
+- Product Hunt/HN/Reddit account eligibility and immediate pre-post rule recheck
+- human-authored PH/HN comments and all actual posts

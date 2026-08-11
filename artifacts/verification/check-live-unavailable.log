@@ -1,0 +1,29 @@
+$ uv run queryspend check --base fixtures/northstar/base/manifest.json --head fixtures/northstar/head/manifest.json --config fixtures/northstar/queryspend.yml --output artifacts/verification/live-unavailable-partial-report.json --no-progress
+QUERYSPEND — ESTIMATE, NOT AN INVOICE
+Decision: UNKNOWN (unknown models present)
+Known monthly change: Unknown (no complete USD estimate)
+Coverage: 0 known / 5 affected; 5 not known
+Confidence: unknown
+Largest known contributor: none
+
+Model                                      Change       Monthly delta       Confidence  Status
+------------------------------------------------------------------------------------------------------------
+model.northstar_retail.daily_margin      unchanged    Unknown             unknown     UNKNOWN
+  Reasons: unknown_downstream_data_shape
+model.northstar_retail.dim_customer      modified     Unknown             unknown     ERROR
+  Reasons: permission_denied
+model.northstar_retail.fct_orders        modified     Unknown             unknown     ERROR
+  Reasons: permission_denied
+model.northstar_retail.monthly_kpis      unchanged    Unknown             unknown     UNKNOWN
+  Reasons: unknown_downstream_data_shape
+model.northstar_retail.orders_view       modified     Unknown             unknown     UNKNOWN
+  Reasons: unknown_view_consumer_cost
+
+Estimates use explicit frequency and price; unknown values are never treated as $0.
+queryspend: Every eligible BigQuery dry-run failed authentication or authorization. No SQL or provider message was logged.
+EXIT_CODE=4
+LIVE_BIGQUERY_TEST=NOT_RUN_NO_ADC_OR_OIDC
+PARTIAL_REPORT_DECISION=unknown
+ERROR_MODELS=2
+SQL_INCLUDED=false
+REASON_CODES=permission_denied,unknown_downstream_data_shape,unknown_view_consumer_cost

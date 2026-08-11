@@ -1,0 +1,22 @@
+$ uv run queryspend demo --output artifacts/verification/demo-report.json
+SIMULATED DEMO — not a live BigQuery estimate
+QUERYSPEND — ESTIMATE, NOT AN INVOICE
+Decision: WARN (usd threshold exceeded)
+Known monthly subtotal increase: +487.50 USD/month
+Coverage: 2 known / 5 affected; 3 not known
+Confidence: high
+Largest known contributor: model.northstar_retail.fct_orders (+675.00 USD/month)
+
+Model                                      Change       Monthly delta       Confidence  Status
+------------------------------------------------------------------------------------------------------------
+model.northstar_retail.fct_orders        modified     +675.00 USD/month   high        KNOWN
+model.northstar_retail.dim_customer      modified     -187.50 USD/month   high        KNOWN
+model.northstar_retail.daily_margin      unchanged    Unknown             unknown     UNKNOWN
+  Reasons: unknown_downstream_data_shape
+model.northstar_retail.monthly_kpis      unchanged    Unknown             unknown     UNKNOWN
+  Reasons: unknown_downstream_data_shape
+model.northstar_retail.orders_view       modified     Unknown             unknown     UNKNOWN
+  Reasons: unknown_view_consumer_cost
+
+Estimates use explicit frequency and price; unknown values are never treated as $0.
+EXIT_CODE=0
