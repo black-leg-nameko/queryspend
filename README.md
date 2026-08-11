@@ -2,7 +2,7 @@
 
 **See the recurring BigQuery cost delta of a dbt pull request before merge.**
 
-[![CI configured](https://img.shields.io/badge/CI-configured-1F883D.svg)](.github/workflows/ci.yml)
+[![CI](https://github.com/black-leg-nameko/queryspend/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/black-leg-nameko/queryspend/actions/workflows/ci.yml)
 [![Python 3.11–3.13](https://img.shields.io/badge/python-3.11%E2%80%933.13-3776AB.svg)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-0B7285.svg)](LICENSE)
 
@@ -16,7 +16,7 @@ credential-free; it is not a live BigQuery result or an accuracy benchmark.
 With [uv](https://docs.astral.sh/uv/getting-started/installation/) installed:
 
 ```bash
-git clone https://github.com/queryspend/queryspend.git
+git clone https://github.com/black-leg-nameko/queryspend.git
 cd queryspend
 uv run queryspend demo
 ```

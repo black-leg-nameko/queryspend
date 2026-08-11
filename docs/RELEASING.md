@@ -34,6 +34,6 @@ PyPI token.
 ## After release
 
 - Install the wheel in a clean environment and run `queryspend demo`.
-- Verify the release asset hashes and generated notes.
+- Verify the release asset hashes and curated notes.
 - Pin GitHub Action consumers to the reviewed 40-character release commit SHA, not a movable tag.
 - Keep the alpha caveats visible until live ADC/OIDC and real accuracy evidence exist.

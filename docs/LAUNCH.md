@@ -46,7 +46,7 @@ work toward, not claims or entitlements.
 
 Do:
 
-- link directly to `https://github.com/queryspend/queryspend` once it exists;
+- link directly to `https://github.com/black-leg-nameko/queryspend`;
 - lead with the credential-free `uv run queryspend demo` path;
 - call the demo and validation data synthetic wherever their numbers appear;
 - identify the project as alpha and repeat the unverified ADC/OIDC limitations;
@@ -112,7 +112,7 @@ The direct product URL is the GitHub repository.
 - Pricing: Free
 - Status: Available, with the listing and first comment explicitly calling it alpha
 - Maker: the actual maintainer's personal account
-- Primary URL: `https://github.com/queryspend/queryspend`
+- Primary URL: `https://github.com/black-leg-nameko/queryspend`
 - Promo: none
 
 The preferred tagline wins because it names the affected system, workflow moment, and user-visible
@@ -254,7 +254,7 @@ Body:
 > The one-command demo is synthetic and credential-free. The project is alpha: the offline core is
 > tested, but real BigQuery ADC accuracy and the GitHub-hosted OIDC workflow are not yet validated.
 >
-> Repository: https://github.com/queryspend/queryspend
+> Repository: https://github.com/black-leg-nameko/queryspend
 >
 > For teams doing pre-deployment cloud-cost review: do you treat uncertain downstream costs as a
 > blocker, a warning, or a separate approval step?
@@ -290,7 +290,7 @@ Launch post:
 >
 > The demo is synthetic; live ADC/OIDC validation is still pending.
 >
-> https://github.com/queryspend/queryspend
+> https://github.com/black-leg-nameko/queryspend
 
 Technical follow-up:
 
@@ -301,7 +301,7 @@ Technical follow-up:
 >
 > Reproducible synthetic demo: uv run queryspend demo
 >
-> https://github.com/queryspend/queryspend
+> https://github.com/black-leg-nameko/queryspend
 
 Optional pre-launch note at T−7, only if the account already discusses this work:
 
@@ -328,7 +328,7 @@ Do not tag unrelated influencers, auto-reply, recycle the post into threads, or 
 > This is an alpha. The offline core and security invariants are tested; real BigQuery ADC accuracy,
 > GitHub-hosted workflow execution, and OIDC are still pending validation.
 >
-> Repository: https://github.com/queryspend/queryspend
+> Repository: https://github.com/black-leg-nameko/queryspend
 >
 > I’m especially interested in how data platform and FinOps teams represent uncertain downstream
 > cost during code review.

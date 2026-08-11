@@ -6,7 +6,7 @@ Do not open a public issue or include secrets, raw SQL, production manifests, or
 report. Use the repository's **Security** tab and choose **Report a vulnerability** to open a private
 GitHub Security Advisory:
 
-<https://github.com/queryspend/queryspend/security/advisories/new>
+<https://github.com/black-leg-nameko/queryspend/security/advisories/new>
 
 Include the affected version, impact, minimal sanitized reproduction, and suggested remediation if
 known. Expect acknowledgement within 72 hours and a status update within seven days. Please allow a

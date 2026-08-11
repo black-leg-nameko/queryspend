@@ -44,8 +44,8 @@ dev = [
 queryspend = "queryspend.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/queryspend/queryspend"
-Issues = "https://github.com/queryspend/queryspend/issues"
+Homepage = "https://github.com/black-leg-nameko/queryspend"
+Issues = "https://github.com/black-leg-nameko/queryspend/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["queryspend"]

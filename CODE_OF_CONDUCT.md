@@ -34,7 +34,7 @@ project in public spaces.
 ## Enforcement
 
 Report abusive, harassing, or otherwise unacceptable behavior privately through the repository's
-[private vulnerability reporting form](https://github.com/queryspend/queryspend/security/advisories/new)
+[private vulnerability reporting form](https://github.com/black-leg-nameko/queryspend/security/advisories/new)
 with `[CODE OF CONDUCT]` in the title. Do not expose a target's personal information in a public
 issue. All reports will be reviewed promptly and fairly, and maintainers will respect reporters'
 privacy and security.

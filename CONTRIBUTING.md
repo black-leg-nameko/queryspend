@@ -10,7 +10,7 @@ contribution must not weaken the dry-run-only, no-raw-SQL, or fail-closed input 
 Prerequisites: Git and [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 ```bash
-git clone https://github.com/queryspend/queryspend.git
+git clone https://github.com/black-leg-nameko/queryspend.git
 cd queryspend
 uv sync --extra dev --locked
 uv run queryspend demo
