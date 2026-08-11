@@ -1,7 +1,8 @@
 queryspend distribution launch audit
 date: 2026-08-11 JST
 document: docs/LAUNCH.md
-publication: NOT PERFORMED
+repository_release: PERFORMED 2026-08-11
+channel_publication: NOT PERFORMED
 
 LAUNCH ASSET
 result=PASS
@@ -52,7 +53,8 @@ synthetic demo as live accuracy=PROHIBITED
 live ADC/OIDC/hosted Action claims=PROHIBITED until verified
 HN generated or AI-edited comments=PROHIBITED; human worksheet only
 PH AI-generated comments=PROHIBITED; human worksheet only
-external publication commands=NOT RUN
+repository commit/push/release commands=RUN with explicit user approval
+Product Hunt/HN/Reddit/X/LinkedIn commands=NOT RUN
 
 FINAL LOCAL RECHECK
 Python 3.14 tests=75 passed coverage=90.69% threshold=90%
@@ -75,11 +77,18 @@ launch_document=PASS
 design_md=N/A (CLI and composite GitHub Action; no Web UI)
 
 EXTERNAL PENDING
-- repository/remote/initial commit and explicit publication consent
-- full-history gitleaks scan after history exists
-- public hosted main CI and immutable v0.1.0 release/provenance
-- GitHub description/topics/social preview/Issues/Discussions/private reporting
+- manual GitHub social-preview upload
 - isolated-project BigQuery ADC result and audit-log evidence
 - GitHub-hosted workflow_run/OIDC/protected-environment Action result
 - Product Hunt/HN/Reddit account eligibility and immediate pre-post rule recheck
 - human-authored PH/HN comments and all actual posts
+
+POST-PUBLICATION VERIFICATION
+repository=https://github.com/black-leg-nameko/queryspend visibility=public
+main_ci_run=31469012029 result=PASS
+metadata=description,topics,Issues,Discussions,private-reporting,secret-scanning applied
+full_history_gitleaks=PASS
+release=https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0
+release_workflow_run=31469203644 result=PASS
+release_assets=wheel,sdist provenance=verified
+public_clone_demo=PASS elapsed_seconds=4 credentials=none

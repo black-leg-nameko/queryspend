@@ -1,16 +1,20 @@
-# Repository metadata handoff
+# Repository metadata record
 
-These values are prepared for the human-owned publication step. They have not been applied.
+These values were applied to `black-leg-nameko/queryspend` on 2026-08-11. The repository is public;
+the social preview remains a manual GitHub UI task because the public repository API does not
+expose an upload endpoint for it.
 
 - Description (73 characters): `Estimate recurring BigQuery cost changes in dbt pull requests before merge.`
 - Primary language / Trending category: `Python`
 - Topics (10): `bigquery`, `dbt`, `finops`, `cost-optimization`, `data-engineering`, `cli`,
   `github-actions`, `python`, `devtools`, `continuous-integration`
 - Website: leave blank until a maintained project page exists; do not point at an unowned domain
-- Social preview upload: `assets/social-preview.png` (1280×640)
+- Social preview upload: pending manual upload of `assets/social-preview.png` (1280×640)
 - Default branch: `main`
-- Features to enable: Issues, Discussions, private vulnerability reporting
-- Initial release: `v0.1.0` only after the release preflight and explicit approval
+- Enabled features: Issues, Discussions, private vulnerability reporting, secret scanning, secret
+  scanning push protection, and Dependabot security updates
+- Initial release: [`v0.1.0`](https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0),
+  published 2026-08-11 after explicit approval and the release preflight
 
-Do not run `gh repo edit`, create a remote, upload the image, push, or create a release without the
-user's explicit publication instruction.
+Product Hunt, Hacker News, Reddit, X, and LinkedIn publication is still human-owned and was not
+performed as part of the repository release.

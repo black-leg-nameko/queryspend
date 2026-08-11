@@ -1,4 +1,4 @@
-# queryspend v0.1.0 — draft release notes
+# queryspend v0.1.0
 
 queryspend estimates the recurring on-demand BigQuery cost delta of a dbt pull request before merge.
 
@@ -19,10 +19,11 @@ GitHub-hosted Action run are not yet verified. The checked-in validation corpus 
 not establish real-world prediction accuracy. Capacity/reservation pricing and non-BigQuery
 warehouses are unsupported.
 
-Start without credentials:
+Install the published wheel and start without credentials:
 
 ```bash
-uv run queryspend demo
+python -m pip install https://github.com/black-leg-nameko/queryspend/releases/download/v0.1.0/queryspend-0.1.0-py3-none-any.whl
+queryspend demo
 ```
 
 See `README.md`, `SECURITY.md`, and `docs/ROADMAP.md` before production evaluation.

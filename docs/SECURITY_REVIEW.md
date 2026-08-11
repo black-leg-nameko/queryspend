@@ -70,7 +70,7 @@ Open finding count after re-review: Critical 0, High 0, Medium 0, Low 0.
 
 | Class | Verdict | Evidence |
 |---|---|---|
-| Secrets | Clear in working tree | `gitleaks dir . --no-banner --redact` found no leaks. No `.env`, private key, credential, personal email, internal URL, or raw SQL appeared in generated artifacts. Full-history scan is pending because the repository has zero commits. |
+| Secrets | Clear in working tree and full history | `gitleaks dir . --no-banner --redact` and `gitleaks git . --redact --no-banner` found no leaks; the pinned hosted secret-scan job also passed. No `.env`, private key, credential, internal URL, or raw SQL appeared in generated artifacts. |
 | Authentication/session | N/A | No user accounts, sessions, passwords, OAuth callback, or service endpoint. ADC and GitHub OIDC are delegated identity mechanisms and reviewed under workflow trust. |
 | Authorization/IDOR/multi-tenancy | N/A | No server, tenant, endpoint, or persistent datastore. BigQuery IAM guidance limits the job project and referenced datasets. |
 | Input validation/path handling | Clear after fixes | Strict YAML/JSON models, regular-file and size checks, bounded graph/data, workspace containment, input-symlink rejection, and atomic output. |
@@ -104,9 +104,11 @@ These are explicit limits, not open source-code vulnerabilities:
    job therefore depends on protected-environment reviewers inspecting the verified SHA. Keep the
    service account restricted to a dedicated billing project and only required datasets, and
    prevent self-review.
-3. **Hosted repository/history unverified (Low operational risk).** The working tree has no remote
-   and zero commits. Run a full-history secret scan, hosted CI matrix, private vulnerability-report
-   check, and immutable-SHA Action smoke before public publication.
+3. **Hosted credentialed Action path unverified (Low operational risk).** Public `main` CI, the
+   full-history secret scan, private vulnerability reporting, release workflow, artifact
+   attestations, and a clean release-wheel install are verified. A real hosted `workflow_run` with
+   OIDC, protected-environment approval, and BigQuery credentials is still unverified; retain the
+   alpha caveat until that path has sanitized evidence.
 4. **Dependency results age (Low operational risk).** Regenerate `requirements-action.txt` from the
    locked graph, review the diff, and rerun `pip-audit` whenever dependencies change. A clean audit
    is point-in-time evidence, not a guarantee against future disclosures.
@@ -124,8 +126,9 @@ The final reproducible command transcript is in
 - sdist/wheel build and `twine check`: passed;
 - fresh-venv hash-locked Action harness and clean-wheel demo: passed;
 - `pip-audit`: no known vulnerabilities;
-- working-tree gitleaks and public Markdown link checks: passed.
+- working-tree and full-history gitleaks plus public Markdown link checks: passed;
+- hosted `main` CI run 31469012029 and release run 31469203644: passed;
+- published wheel/sdist attestations and clean release-wheel demo: verified.
 
-Gate C covers code and repository preparation. It does not erase the live integration or external
-publication checks above, and it does not authorize a remote, push, tag, release, metadata change,
-or social post.
+Gate C and repository publication checks are complete. They do not erase the live ADC/OIDC limits
+above and do not authorize Product Hunt, Hacker News, Reddit, X, LinkedIn, or other social posts.

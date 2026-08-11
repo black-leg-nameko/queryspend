@@ -1,6 +1,6 @@
 queryspend Gate C defensive review closure
 date: 2026-08-11 JST
-scope: local source tree; no remote, hosted CI, ADC, OIDC, or third-party target
+initial_scope: local source tree before remote publication; no ADC, OIDC, or third-party target
 
 FINDINGS
 critical_open=0
@@ -27,7 +27,7 @@ actionlint CI/release/example workflows: PASS
 DEPENDENCIES AND SECRETS
 pip-audit 2.10.1 -r requirements-action.txt: PASS (0 known vulnerabilities)
 gitleaks dir . --no-banner --redact: PASS (2.53 MB scanned, no leaks)
-full-history gitleaks: NOT RUN (repository has zero commits; external publication preflight)
+full-history gitleaks: PASS (complete v0.1.0 history, no leaks; repeated in hosted CI)
 
 LINKS
 markdown-link-check: PASS (21 public Markdown files after docs/LAUNCH.md)
@@ -55,7 +55,8 @@ stale/symlink report and input-path regressions: PASS in full test matrix
 
 VERDICT
 Gate C code/repository-preparation controls: PASS
-External hosted/live validation and explicit publication consent: PENDING, not simulated
+Initial external hosted/live validation and publication consent: PENDING at Gate C closure;
+repository publication was later authorized and is recorded below
 
 FINAL POST-LAUNCH-DOCUMENT RECHECK
 date: 2026-08-11 JST
@@ -71,3 +72,17 @@ uv build + twine: PASS
 clean Python 3.13.14 wheel demo: PASS (SIMULATED disclosure and WARN result verified)
 clean Python 3.13.14 hash-locked Action harness: PASS (decision=pass)
 launch asset audit: artifacts/verification/launch-audit.log
+
+POST-PUBLICATION VERIFICATION
+date: 2026-08-11 JST
+repository=https://github.com/black-leg-nameko/queryspend visibility=public
+main_ci_run=31469012029 result=PASS
+full_history_gitleaks=PASS
+release=https://github.com/black-leg-nameko/queryspend/releases/tag/v0.1.0
+release_workflow_run=31469203644 result=PASS
+tag=v0.1.0 type=annotated signing=unsigned reason=no_signing_key_available
+wheel_sha256=68b847f7a30f5fc98a69f54202ad84665a521f898f48d4a7527869f75c2f854c
+sdist_sha256=c908f5af7608170d0a13749313ed01957e740a7ac4b207e488cbd356fb256a8d
+provenance_attestations=1_per_asset
+release_wheel_install_demo=PASS
+remaining=live BigQuery ADC/audit evidence and hosted workflow_run/OIDC/protected Action

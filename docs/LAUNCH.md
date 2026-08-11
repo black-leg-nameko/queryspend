@@ -405,12 +405,12 @@ stop repeating tactics whose referred users do not run, open issues, or return.
 | Date | Owner action | Evidence / stop condition |
 |---|---|---|
 | Aug 11 (T−14) | Freeze positioning; start daily Trending log; reserve human response coverage | This plan plus first calibration row |
-| Aug 12–14 | Create a private remote/initial history only with explicit user approval; full-history gitleaks; configure metadata and private reporting | No public push; any secret blocks launch |
-| Aug 15–16 | Run hosted Python 3.11–3.13 CI; validate release workflow in a safe branch/tag rehearsal | All required jobs green |
+| Aug 11 (completed early) | Create the public repository with explicit user approval; run full-history gitleaks; configure metadata and private reporting | Complete: no leaks; metadata and reporting route verified |
+| Aug 11 (completed early) | Run hosted Python 3.11–3.13 CI and the release workflow | Complete: `main` and v0.1.0 release workflows green |
 | Aug 17–18 | Run isolated BigQuery ADC and hosted Action/OIDC tests if credentials and a protected environment are authorized | Capture sanitized audit evidence; otherwise retain alpha caveat |
 | Aug 18 (T−7) | Recheck PH/HN/Reddit rules; send one r/bigquery modmail; maker begins human PH/HN notes | Any material rule conflict removes channel |
 | Aug 19–20 | Build PH thumbnail/gallery derivatives; native-size and mobile QA; verify alt text | No clipped text or missing synthetic disclosure |
-| Aug 21 | Publish immutable v0.1.0 only with explicit approval; fresh-install smoke; pin Action SHA | Release assets and hosted provenance verify |
+| Aug 11 (completed early) | Publish v0.1.0 with explicit approval; fresh-install smoke; verify hosted provenance | Complete: wheel/sdist and one attestation per asset verified |
 | Aug 22 | Create PH draft; verify direct GitHub URL, price, alpha status, and preview | Draft only; no accidental immediate launch |
 | Aug 23 (T−2) | Final Trending recalibration; human rewrites PH/HN comments; dry-run day-of checklist | Human confirms no AI comment text |
 | Aug 24 (T−1) | Freeze code except security/release blockers; link/secret/quickstart check; rest response team | Any Critical/High or broken install postpones |
@@ -494,14 +494,16 @@ The human launch owner signs this at T−48 hours and again at T−2 hours.
 
 ### Must be green
 
-- [ ] Explicit approval to create/use the public repository, push, tag, release, and post
-- [ ] Public repository exists at the exact URLs used in all drafts
-- [ ] Full-history `gitleaks git .` passes after the initial commit and before public push
-- [ ] Hosted `main` CI is green on Python 3.11, 3.12, and 3.13
-- [ ] `v0.1.0` wheel/sdist install, hashes, `twine check`, and provenance verify
-- [ ] README public clone → `uv run queryspend demo` succeeds in under 60 seconds
-- [ ] GitHub metadata, topics, social preview, license, Issues, and private reporting are visible
-- [ ] No open Critical/High security finding; Gate C evidence still matches released source
+- [x] Explicit approval to create/use the public repository, push, tag, and release
+- [ ] Explicit approval to post through each human-owned launch channel
+- [x] Public repository exists at the exact URLs used in all drafts
+- [x] Full-history `gitleaks git .` passes over the published history
+- [x] Hosted `main` CI is green on Python 3.11, 3.12, and 3.13
+- [x] `v0.1.0` wheel/sdist install, hashes, `twine check`, and provenance verify
+- [x] README public clone → `uv run queryspend demo` succeeds in under 60 seconds
+- [x] GitHub description, topics, license, Issues, Discussions, and private reporting are visible
+- [ ] Upload and verify the GitHub social preview through repository settings
+- [x] No open Critical/High security finding; Gate C evidence matches the released source
 - [ ] PH media has two or more gallery assets and readable synthetic/alpha disclosure
 - [ ] Current PH/HN/Reddit rules and account eligibility rechecked by a human
 - [ ] PH/HN comments and replies written independently by the human maker
@@ -514,9 +516,10 @@ The human launch owner signs this at T−48 hours and again at T−2 hours.
   prominent
 - [ ] r/bigquery mod approval received, or that channel remains skipped
 
-If a must-green item fails, move the entire launch rather than publishing partial or broken links.
-Do not infer external success from local checks. This plan does not authorize any remote creation,
-commit, push, release, metadata update, or social post.
+If a must-green item fails, move the entire channel launch rather than publishing partial or broken
+links. Do not infer live integration success from repository checks. The repository and v0.1.0 were
+published under the user's 2026-08-11 instruction; this plan still does not authorize any social
+post.
 
 ## Day-of operator checklist
 
