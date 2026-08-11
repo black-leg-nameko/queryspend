@@ -1,0 +1,95 @@
+{
+  "diagnostics": [],
+  "events": [],
+  "inputs": {
+    "base_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000006",
+    "billing_model": "on_demand",
+    "billing_project": "synthetic-validation",
+    "dbt_manifest_versions": [
+      10,
+      11
+    ],
+    "head_manifest_sha256": "000000000000000000000000000000000000000000000000000000000000006a",
+    "location": "US",
+    "price_per_tib_usd": "6.250000",
+    "provider": "bigquery"
+  },
+  "models": [
+    {
+      "affected_reason": "changed",
+      "base": {
+        "estimated_billed_bytes": 10485760,
+        "fixture": false,
+        "latency_ms": null,
+        "location": null,
+        "raw_bytes": 1,
+        "sql_sha256": null,
+        "statement_type": null,
+        "table_count": 1
+      },
+      "base_materialization": "table",
+      "change_type": "modified",
+      "confidence": "high",
+      "display_name": "search_events",
+      "fingerprint_base": "base-06",
+      "fingerprint_head": "head-06",
+      "frequency_source": "config_model",
+      "head": {
+        "estimated_billed_bytes": 20971520,
+        "fixture": false,
+        "latency_ms": null,
+        "location": null,
+        "raw_bytes": 2,
+        "sql_sha256": null,
+        "statement_type": null,
+        "table_count": 1
+      },
+      "head_materialization": "table",
+      "monthly_bytes_delta": "314572800.000000",
+      "monthly_cost_delta_usd": "520.000000",
+      "reason_codes": [],
+      "runs_per_month": "30",
+      "status": "known",
+      "unique_id": "model.harbor.search_events"
+    }
+  ],
+  "policy": {
+    "actuals": {
+      "unknown_models": 0
+    },
+    "decision": "pass",
+    "reason": "within_thresholds",
+    "thresholds": {
+      "max_monthly_delta_usd": "1000.000000"
+    }
+  },
+  "privacy": {
+    "model_names_included": true,
+    "relation_names_included": false,
+    "sql_included": false
+  },
+  "run": {
+    "case_id": "harbor-source-scan",
+    "duration_ms": 1,
+    "id": "00000000-0000-0000-0000-000000000006",
+    "queryspend_version": "0.1.0",
+    "simulated": true,
+    "started_at": "2026-08-11T00:00:00Z"
+  },
+  "schema": "https://queryspend.dev/schemas/report/v1.json",
+  "schema_version": 1,
+  "summary": {
+    "affected_models": 1,
+    "complete": true,
+    "confidence": "high",
+    "error_models": 0,
+    "gross_monthly_decrease_usd": "0.000000",
+    "gross_monthly_increase_usd": "520.000000",
+    "known_models": 1,
+    "known_monthly_bytes_delta": "314572800.000000",
+    "known_monthly_delta_usd": "520.000000",
+    "largest_known_contributor": "model.harbor.search_events",
+    "unknown_models": 0,
+    "unsupported_models": 0
+  }
+}

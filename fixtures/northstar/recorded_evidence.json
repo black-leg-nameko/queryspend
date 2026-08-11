@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "fixture": true,
+  "description": "Synthetic dry-run evidence for the credential-free northstar_retail demo.",
+  "responses": {
+    "118ed1cb235f5a987596692f8775de5e429a1640c7f70cbdd60f2de1a94b61e0": {
+      "status": "known",
+      "raw_bytes": 1319413953331,
+      "table_count": 1,
+      "location": "US",
+      "statement_type": "SELECT",
+      "referenced_table_types": ["TABLE"],
+      "clustered_table_detected": false,
+      "timestamp": "2026-08-11T00:00:00Z",
+      "latency_ms": 84,
+      "reason_codes": []
+    },
+    "83de72b2cabf895b29e529eae7b60f17b014f813baa71f0e9ba0e50d5da30107": {
+      "status": "known",
+      "raw_bytes": 5277655813325,
+      "table_count": 1,
+      "location": "US",
+      "statement_type": "SELECT",
+      "referenced_table_types": ["TABLE"],
+      "clustered_table_detected": false,
+      "timestamp": "2026-08-11T00:00:00Z",
+      "latency_ms": 91,
+      "reason_codes": []
+    },
+    "a9e1c7c6b8ae5011a85e85b982084180f42da88fad432343fac8664f9746bafd": {
+      "status": "known",
+      "raw_bytes": 2199023255552,
+      "table_count": 1,
+      "location": "US",
+      "statement_type": "SELECT",
+      "referenced_table_types": ["TABLE"],
+      "clustered_table_detected": false,
+      "timestamp": "2026-08-11T00:00:00Z",
+      "latency_ms": 72,
+      "reason_codes": []
+    },
+    "1c9e0688bfc7eb43af831f1804a079893bdfc9a6d0655089b86ced21d834ae32": {
+      "status": "known",
+      "raw_bytes": 1099511627776,
+      "table_count": 1,
+      "location": "US",
+      "statement_type": "SELECT",
+      "referenced_table_types": ["TABLE"],
+      "clustered_table_detected": false,
+      "timestamp": "2026-08-11T00:00:00Z",
+      "latency_ms": 69,
+      "reason_codes": []
+    }
+  }
+}

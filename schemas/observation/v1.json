@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "actual_monthly_bytes_delta": {
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Actual Monthly Bytes Delta",
+      "type": "string"
+    },
+    "actual_monthly_delta_usd": {
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Actual Monthly Delta Usd",
+      "type": "string"
+    },
+    "actual_runs_per_month": {
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Actual Runs Per Month",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "ground_truth_attributed": {
+      "title": "Ground Truth Attributed",
+      "type": "boolean"
+    },
+    "model_unique_id": {
+      "title": "Model Unique Id",
+      "type": "string"
+    },
+    "observation_complete": {
+      "default": true,
+      "title": "Observation Complete",
+      "type": "boolean"
+    },
+    "observation_window_days": {
+      "title": "Observation Window Days",
+      "type": "integer"
+    },
+    "policy_threshold_usd": {
+      "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+      "title": "Policy Threshold Usd",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source": {
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "model_unique_id",
+    "policy_threshold_usd",
+    "actual_monthly_delta_usd",
+    "actual_monthly_bytes_delta",
+    "actual_runs_per_month",
+    "ground_truth_attributed",
+    "source",
+    "observation_window_days"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

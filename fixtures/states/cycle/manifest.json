@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json",
+    "adapter_type": "bigquery",
+    "project_name": "cycle_fixture"
+  },
+  "nodes": {
+    "model.cycle_fixture.a": {
+      "unique_id": "model.cycle_fixture.a",
+      "resource_type": "model",
+      "package_name": "cycle_fixture",
+      "name": "a",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["model.cycle_fixture.b"]},
+      "compiled_code": "select 1",
+      "database": "fixture",
+      "schema": "analytics",
+      "alias": "a",
+      "checksum": "a"
+    },
+    "model.cycle_fixture.b": {
+      "unique_id": "model.cycle_fixture.b",
+      "resource_type": "model",
+      "package_name": "cycle_fixture",
+      "name": "b",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["model.cycle_fixture.a"]},
+      "compiled_code": "select 2",
+      "database": "fixture",
+      "schema": "analytics",
+      "alias": "b",
+      "checksum": "b"
+    }
+  },
+  "sources": {}
+}

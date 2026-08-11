@@ -1,0 +1,2 @@
+"""Bundled synthetic demo artifacts."""
+

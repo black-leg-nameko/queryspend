@@ -1,0 +1,172 @@
+{
+  "$defs": {
+    "ValidationMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute_error_usd": {
+          "title": "Absolute Error Usd",
+          "type": "string"
+        },
+        "actual_non_block_cases": {
+          "title": "Actual Non Block Cases",
+          "type": "integer"
+        },
+        "corpus_cases": {
+          "title": "Corpus Cases",
+          "type": "integer"
+        },
+        "cost_weighted_attribution_percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cost Weighted Attribution Percent"
+        },
+        "coverage_percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Coverage Percent"
+        },
+        "eligible_ape_cases": {
+          "title": "Eligible Ape Cases",
+          "type": "integer"
+        },
+        "excluded_small_actual_cases": {
+          "title": "Excluded Small Actual Cases",
+          "type": "integer"
+        },
+        "false_blocker_percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "False Blocker Percent"
+        },
+        "false_blockers": {
+          "title": "False Blockers",
+          "type": "integer"
+        },
+        "median_ape_percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Median Ape Percent"
+        },
+        "observations": {
+          "title": "Observations",
+          "type": "integer"
+        },
+        "p90_ape_percent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "P90 Ape Percent"
+        },
+        "unknown_prediction_cases": {
+          "title": "Unknown Prediction Cases",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "corpus_cases",
+        "observations",
+        "eligible_ape_cases",
+        "excluded_small_actual_cases",
+        "unknown_prediction_cases",
+        "median_ape_percent",
+        "p90_ape_percent",
+        "cost_weighted_attribution_percent",
+        "false_blocker_percent",
+        "false_blockers",
+        "actual_non_block_cases",
+        "coverage_percent",
+        "absolute_error_usd"
+      ],
+      "title": "ValidationMetrics",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "decision": {
+      "enum": [
+        "pass",
+        "fail"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "evaluated_at": {
+      "title": "Evaluated At",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "failed_criteria": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Criteria",
+      "type": "array"
+    },
+    "metrics": {
+      "$ref": "#/$defs/ValidationMetrics"
+    },
+    "profile": {
+      "const": "technical-gate-v1",
+      "default": "technical-gate-v1",
+      "title": "Profile",
+      "type": "string"
+    },
+    "schema": {
+      "default": "https://queryspend.dev/schemas/validation/v1.json",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "evaluated_at",
+    "decision",
+    "failed_criteria",
+    "metrics",
+    "events"
+  ],
+  "title": "ValidationReport",
+  "type": "object"
+}

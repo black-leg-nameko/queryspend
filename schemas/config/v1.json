@@ -1,0 +1,193 @@
+{
+  "$defs": {
+    "Confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "FrequenciesConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "default_runs_per_month": {
+          "anyOf": [
+            {
+              "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Runs Per Month"
+        },
+        "models": {
+          "additionalProperties": {
+            "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+            "type": "string"
+          },
+          "title": "Models",
+          "type": "object"
+        }
+      },
+      "title": "FrequenciesConfig",
+      "type": "object"
+    },
+    "PolicyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "default": "warn",
+          "enum": [
+            "warn",
+            "block"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "max_monthly_delta_bytes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Monthly Delta Bytes"
+        },
+        "max_monthly_delta_usd": {
+          "anyOf": [
+            {
+              "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Monthly Delta Usd"
+        },
+        "minimum_confidence": {
+          "$ref": "#/$defs/Confidence",
+          "default": "high"
+        },
+        "unknown_behavior": {
+          "default": "warn",
+          "enum": [
+            "warn",
+            "block",
+            "ignore"
+          ],
+          "title": "Unknown Behavior",
+          "type": "string"
+        }
+      },
+      "title": "PolicyConfig",
+      "type": "object"
+    },
+    "PrivacyConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "include_model_names": {
+          "default": true,
+          "title": "Include Model Names",
+          "type": "boolean"
+        },
+        "include_relation_names": {
+          "default": false,
+          "title": "Include Relation Names",
+          "type": "boolean"
+        }
+      },
+      "title": "PrivacyConfig",
+      "type": "object"
+    },
+    "WarehouseConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "billing_model": {
+          "const": "on_demand",
+          "default": "on_demand",
+          "title": "Billing Model",
+          "type": "string"
+        },
+        "billing_project": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Project"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "price_per_tib_usd": {
+          "anyOf": [
+            {
+              "pattern": "^-?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Per Tib Usd"
+        },
+        "provider": {
+          "const": "bigquery",
+          "default": "bigquery",
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "title": "WarehouseConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frequencies": {
+      "$ref": "#/$defs/FrequenciesConfig"
+    },
+    "policy": {
+      "$ref": "#/$defs/PolicyConfig"
+    },
+    "privacy": {
+      "$ref": "#/$defs/PrivacyConfig"
+    },
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "warehouse": {
+      "$ref": "#/$defs/WarehouseConfig"
+    }
+  },
+  "title": "QuerySpendConfig",
+  "type": "object"
+}

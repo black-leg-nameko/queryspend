@@ -1,0 +1,24 @@
+version: 1
+warehouse:
+  provider: bigquery
+  billing_model: on_demand
+  billing_project: synthetic-demo
+  location: US
+  price_per_tib_usd: "6.25"
+frequencies:
+  default_runs_per_month: null
+  models:
+    model.northstar_retail.fct_orders: "30"
+    model.northstar_retail.dim_customer: "30"
+    model.northstar_retail.daily_margin: "30"
+    model.northstar_retail.monthly_kpis: "1"
+    model.northstar_retail.orders_view: "30"
+policy:
+  max_monthly_delta_usd: "500.00"
+  max_monthly_delta_bytes: null
+  action: warn
+  minimum_confidence: medium
+  unknown_behavior: warn
+privacy:
+  include_model_names: true
+  include_relation_names: false

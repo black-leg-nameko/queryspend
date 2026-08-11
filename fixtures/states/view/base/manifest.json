@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v10.json",
+    "adapter_type": "bigquery",
+    "project_name": "state_fixture"
+  },
+  "nodes": {
+    "model.state_fixture.orders_view": {
+      "unique_id": "model.state_fixture.orders_view",
+      "resource_type": "model",
+      "package_name": "state_fixture",
+      "name": "orders_view",
+      "config": {"enabled": true, "materialized": "view", "meta": {}},
+      "depends_on": {"nodes": ["source.state_fixture.orders"]},
+      "compiled_code": "select order_id from `fixture.raw.orders`",
+      "database": "fixture",
+      "schema": "analytics",
+      "alias": "orders_view",
+      "checksum": {"name": "sha256", "checksum": "base-view"}
+    }
+  },
+  "sources": {
+    "source.state_fixture.orders": {
+      "unique_id": "source.state_fixture.orders",
+      "resource_type": "source"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "queryspend"
+version = "0.1.0"
+description = "Estimate the recurring BigQuery cost delta of dbt pull requests before merge."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "queryspend contributors"}]
+keywords = ["bigquery", "dbt", "finops", "github-actions"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Typing :: Typed",
+]
+dependencies = [
+  "google-cloud-bigquery>=3.35,<4",
+  "pydantic>=2.8,<3",
+  "PyYAML>=6.0,<7",
+  "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2,<2",
+  "hypothesis>=6.112,<7",
+  "jsonschema>=4.23,<5",
+  "mypy>=1.11,<2",
+  "pytest>=8.3,<9",
+  "pytest-cov>=5,<7",
+  "ruff>=0.6,<1",
+  "twine>=6.1,<7",
+  "types-PyYAML>=6.0.12",
+]
+
+[project.scripts]
+queryspend = "queryspend.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/queryspend/queryspend"
+Issues = "https://github.com/queryspend/queryspend/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["queryspend"]
+core-metadata-version = "2.4"
+
+[tool.hatch.build.targets.sdist]
+core-metadata-version = "2.4"
+
+[tool.hatch.build]
+include = [
+  "queryspend/**/*.py",
+  "queryspend/py.typed",
+  "queryspend/data/**/*.json",
+  "queryspend/data/**/*.yml",
+  "schemas/**/*.json",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = ["artifacts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF", "S"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S105", "S106"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["queryspend"]
+
+[tool.coverage.run]
+branch = true
+source = ["queryspend"]
+omit = [
+  "queryspend/cli.py",
+  "queryspend/github_action.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true

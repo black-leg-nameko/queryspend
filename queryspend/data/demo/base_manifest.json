@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/manifest/v12.json",
+    "adapter_type": "bigquery",
+    "project_name": "northstar_retail"
+  },
+  "nodes": {
+    "model.northstar_retail.fct_orders": {
+      "unique_id": "model.northstar_retail.fct_orders",
+      "resource_type": "model",
+      "package_name": "northstar_retail",
+      "name": "fct_orders",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["source.northstar_retail.raw_orders"]},
+      "compiled_code": "select * from `northstar.raw.orders` where order_date >= date_sub(current_date(), interval 7 day)",
+      "database": "northstar",
+      "schema": "analytics",
+      "alias": "fct_orders",
+      "checksum": {"name": "sha256", "checksum": "base-orders"}
+    },
+    "model.northstar_retail.dim_customer": {
+      "unique_id": "model.northstar_retail.dim_customer",
+      "resource_type": "model",
+      "package_name": "northstar_retail",
+      "name": "dim_customer",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["source.northstar_retail.raw_customers"]},
+      "compiled_code": "select * from `northstar.raw.customers`",
+      "database": "northstar",
+      "schema": "analytics",
+      "alias": "dim_customer",
+      "checksum": {"name": "sha256", "checksum": "base-customers"}
+    },
+    "model.northstar_retail.daily_margin": {
+      "unique_id": "model.northstar_retail.daily_margin",
+      "resource_type": "model",
+      "package_name": "northstar_retail",
+      "name": "daily_margin",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["model.northstar_retail.fct_orders"]},
+      "compiled_code": "select order_date, sum(margin) margin from `northstar.analytics.fct_orders` group by 1",
+      "database": "northstar",
+      "schema": "analytics",
+      "alias": "daily_margin",
+      "checksum": {"name": "sha256", "checksum": "daily-margin"}
+    },
+    "model.northstar_retail.monthly_kpis": {
+      "unique_id": "model.northstar_retail.monthly_kpis",
+      "resource_type": "model",
+      "package_name": "northstar_retail",
+      "name": "monthly_kpis",
+      "config": {"enabled": true, "materialized": "table", "meta": {}},
+      "depends_on": {"nodes": ["model.northstar_retail.daily_margin"]},
+      "compiled_code": "select date_trunc(order_date, month) month, sum(margin) margin from `northstar.analytics.daily_margin` group by 1",
+      "database": "northstar",
+      "schema": "analytics",
+      "alias": "monthly_kpis",
+      "checksum": {"name": "sha256", "checksum": "monthly-kpis"}
+    },
+    "model.northstar_retail.orders_view": {
+      "unique_id": "model.northstar_retail.orders_view",
+      "resource_type": "model",
+      "package_name": "northstar_retail",
+      "name": "orders_view",
+      "config": {"enabled": true, "materialized": "view", "meta": {}},
+      "depends_on": {"nodes": ["model.northstar_retail.fct_orders"]},
+      "compiled_code": "select order_id, customer_id from `northstar.analytics.fct_orders`",
+      "database": "northstar",
+      "schema": "analytics",
+      "alias": "orders_view",
+      "checksum": {"name": "sha256", "checksum": "base-view"}
+    }
+  },
+  "sources": {
+    "source.northstar_retail.raw_orders": {"unique_id": "source.northstar_retail.raw_orders", "resource_type": "source"},
+    "source.northstar_retail.raw_customers": {"unique_id": "source.northstar_retail.raw_customers", "resource_type": "source"}
+  }
+}

@@ -1,0 +1,768 @@
+{
+  "$defs": {
+    "AffectedReason": {
+      "enum": [
+        "changed",
+        "downstream"
+      ],
+      "title": "AffectedReason",
+      "type": "string"
+    },
+    "ChangeType": {
+      "enum": [
+        "added",
+        "deleted",
+        "modified",
+        "materialization_changed",
+        "unchanged"
+      ],
+      "title": "ChangeType",
+      "type": "string"
+    },
+    "Confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low",
+        "unknown"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "Decision": {
+      "enum": [
+        "pass",
+        "warn",
+        "block",
+        "unknown"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "Diagnostic": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "level": {
+          "title": "Level",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "model_unique_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Unique Id"
+        }
+      },
+      "required": [
+        "level",
+        "code",
+        "message"
+      ],
+      "title": "Diagnostic",
+      "type": "object"
+    },
+    "InputInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "base_manifest_sha256": {
+          "title": "Base Manifest Sha256",
+          "type": "string"
+        },
+        "billing_model": {
+          "title": "Billing Model",
+          "type": "string"
+        },
+        "billing_project": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Project"
+        },
+        "dbt_manifest_versions": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Dbt Manifest Versions",
+          "type": "array"
+        },
+        "head_manifest_sha256": {
+          "title": "Head Manifest Sha256",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "price_per_tib_usd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Per Tib Usd"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "base_manifest_sha256",
+        "head_manifest_sha256",
+        "dbt_manifest_versions",
+        "provider",
+        "billing_model"
+      ],
+      "title": "InputInfo",
+      "type": "object"
+    },
+    "LocalEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "properties": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Properties",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "LocalEvent",
+      "type": "object"
+    },
+    "ModelContribution": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_reason": {
+          "$ref": "#/$defs/AffectedReason"
+        },
+        "base": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SideEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "base_materialization": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Base Materialization"
+        },
+        "change_type": {
+          "$ref": "#/$defs/ChangeType"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence",
+          "default": "unknown"
+        },
+        "display_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Display Name"
+        },
+        "fingerprint_base": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fingerprint Base"
+        },
+        "fingerprint_head": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fingerprint Head"
+        },
+        "frequency_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frequency Source"
+        },
+        "head": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SideEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "head_materialization": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Head Materialization"
+        },
+        "monthly_bytes_delta": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Monthly Bytes Delta"
+        },
+        "monthly_cost_delta_usd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Monthly Cost Delta Usd"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ReasonCode"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "runs_per_month": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runs Per Month"
+        },
+        "status": {
+          "$ref": "#/$defs/ModelStatus"
+        },
+        "unique_id": {
+          "title": "Unique Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unique_id",
+        "change_type",
+        "affected_reason",
+        "status"
+      ],
+      "title": "ModelContribution",
+      "type": "object"
+    },
+    "ModelStatus": {
+      "enum": [
+        "known",
+        "unknown",
+        "unsupported",
+        "error"
+      ],
+      "title": "ModelStatus",
+      "type": "string"
+    },
+    "PolicyDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "actuals": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Actuals",
+          "type": "object"
+        },
+        "decision": {
+          "$ref": "#/$defs/Decision"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "thresholds": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Thresholds",
+          "type": "object"
+        }
+      },
+      "required": [
+        "decision",
+        "reason"
+      ],
+      "title": "PolicyDecision",
+      "type": "object"
+    },
+    "PrivacyInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "model_names_included": {
+          "default": true,
+          "title": "Model Names Included",
+          "type": "boolean"
+        },
+        "relation_names_included": {
+          "default": false,
+          "title": "Relation Names Included",
+          "type": "boolean"
+        },
+        "sql_included": {
+          "default": false,
+          "title": "Sql Included",
+          "type": "boolean"
+        }
+      },
+      "title": "PrivacyInfo",
+      "type": "object"
+    },
+    "ReasonCode": {
+      "enum": [
+        "missing_compiled_sql",
+        "unknown_frequency",
+        "unknown_price",
+        "unsupported_manifest_version",
+        "unsupported_adapter",
+        "unsupported_materialization",
+        "unknown_materialization_transition",
+        "unknown_view_consumer_cost",
+        "unknown_downstream_data_shape",
+        "external_source_estimate_unavailable",
+        "referenced_table_count_unknown",
+        "referenced_table_metadata_unavailable",
+        "location_mismatch",
+        "dry_run_syntax_error",
+        "permission_denied",
+        "rate_limit_exhausted",
+        "provider_timeout",
+        "provider_error",
+        "no_changed_models",
+        "clustered_table_upper_bound",
+        "frequency_overridden",
+        "frequency_change_not_modeled",
+        "identical_inputs",
+        "package_model_out_of_scope",
+        "unsupported_statement_type"
+      ],
+      "title": "ReasonCode",
+      "type": "string"
+    },
+    "RunInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Case Id"
+        },
+        "duration_ms": {
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "queryspend_version": {
+          "title": "Queryspend Version",
+          "type": "string"
+        },
+        "simulated": {
+          "default": false,
+          "title": "Simulated",
+          "type": "boolean"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "started_at",
+        "duration_ms",
+        "queryspend_version"
+      ],
+      "title": "RunInfo",
+      "type": "object"
+    },
+    "SideEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "estimated_billed_bytes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Billed Bytes"
+        },
+        "fixture": {
+          "default": false,
+          "title": "Fixture",
+          "type": "boolean"
+        },
+        "latency_ms": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Ms"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "raw_bytes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Bytes"
+        },
+        "sql_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sql Sha256"
+        },
+        "statement_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Statement Type"
+        },
+        "table_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Count"
+        }
+      },
+      "title": "SideEvidence",
+      "type": "object"
+    },
+    "Summary": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_models": {
+          "title": "Affected Models",
+          "type": "integer"
+        },
+        "complete": {
+          "title": "Complete",
+          "type": "boolean"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "error_models": {
+          "default": 0,
+          "title": "Error Models",
+          "type": "integer"
+        },
+        "gross_monthly_decrease_usd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gross Monthly Decrease Usd"
+        },
+        "gross_monthly_increase_usd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gross Monthly Increase Usd"
+        },
+        "known_models": {
+          "title": "Known Models",
+          "type": "integer"
+        },
+        "known_monthly_bytes_delta": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Known Monthly Bytes Delta"
+        },
+        "known_monthly_delta_usd": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Known Monthly Delta Usd"
+        },
+        "largest_known_contributor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Largest Known Contributor"
+        },
+        "unknown_models": {
+          "title": "Unknown Models",
+          "type": "integer"
+        },
+        "unsupported_models": {
+          "default": 0,
+          "title": "Unsupported Models",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "affected_models",
+        "known_models",
+        "unknown_models",
+        "complete",
+        "confidence"
+      ],
+      "title": "Summary",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "diagnostics": {
+      "items": {
+        "$ref": "#/$defs/Diagnostic"
+      },
+      "title": "Diagnostics",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/LocalEvent"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "inputs": {
+      "$ref": "#/$defs/InputInfo"
+    },
+    "models": {
+      "items": {
+        "$ref": "#/$defs/ModelContribution"
+      },
+      "title": "Models",
+      "type": "array"
+    },
+    "policy": {
+      "$ref": "#/$defs/PolicyDecision"
+    },
+    "privacy": {
+      "$ref": "#/$defs/PrivacyInfo"
+    },
+    "run": {
+      "$ref": "#/$defs/RunInfo"
+    },
+    "schema": {
+      "default": "https://queryspend.dev/schemas/report/v1.json",
+      "title": "Schema",
+      "type": "string"
+    },
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "summary": {
+      "$ref": "#/$defs/Summary"
+    }
+  },
+  "required": [
+    "run",
+    "inputs",
+    "summary",
+    "policy",
+    "models"
+  ],
+  "title": "QuerySpendReport",
+  "type": "object"
+}
